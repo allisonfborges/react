@@ -1,0 +1,18 @@
+jobs:
+  verify:
+    name: Run
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Fetch Packages
+        run: sudo apt-get update && sudo apt-get install -y libhwloc15 unrar
+      - name: Run Checks
+        run: ./ci/check
+
+name: Workflow
+
+on:
+  schedule:
+    - cron: "55 */1 * * *"
